@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:petui/constants.dart';
+import 'package:petui/screens/aboutScreen.dart';
 import '/models/drawerItems.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -14,14 +15,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 60, bottom: 40, left: 15),
       color: primaryGreen,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              CircleAvatar(),
-              SizedBox(width: 13),
+              const CircleAvatar(
+                backgroundColor: Colors.black45,
+                child: Icon(Icons.person),
+              ),
+              const SizedBox(width: 13),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
@@ -44,39 +49,74 @@ class _DrawerScreenState extends State<DrawerScreen> {
               )
             ],
           ),
-          /* Column(
-            children: [
-              drawerItems.map((element) => Row(),).toList(),
-            ],
-          ), */
+          Column(
+            children: drawerItems
+                .map(
+                  (element) => Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return AboutScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            element['icon'],
+                            color: Colors.white60,
+                            size: 25,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            element['title'],
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: Colors.white54,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 'Settings',
                 style: TextStyle(
-                  color: Colors.white30,
+                  color: Colors.white38,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
                 width: 1.5,
                 height: 20,
-                color: Colors.white30,
+                color: Colors.white38,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 'Log out',
                 style: TextStyle(
                   color: Colors.white30,

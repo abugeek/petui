@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:petui/constants.dart';
 import 'package:petui/models/categories.dart';
@@ -17,13 +18,16 @@ class _HomeScreenState extends State<HomeScreen> {
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
       transform: Matrix4.identity()
         ..translate(xOffset, yOffset)
-        ..scale(scaleFactor),
+        ..scale(scaleFactor)
+        ..rotateY(isDrawerOpen ? 0.7 : 0)
+        ..rotateZ(isDrawerOpen ? 0.1 : 0),
       duration: const Duration(milliseconds: 250),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
@@ -32,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
           BoxShadow(
             color: Colors.grey.shade300,
             blurRadius: 30,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -81,13 +85,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.location_on,
                             color: primaryGreen,
                           ),
+                          const Text(
+                            'Kyiv, ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           const Text('Ukraine'),
                         ],
                       ),
                     ],
                   ),
                   CircleAvatar(
-                    backgroundColor: primaryGreen,
+                    backgroundColor: Colors.grey.shade100,
+                    child: Icon(
+                      Icons.person,
+                      color: primaryGreen,
+                    ),
                   ),
                 ],
               ),
@@ -120,11 +132,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: isSelected ? primaryGreen : Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: shadowList,
                           ),
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.only(left: 20),
                           child: Image.asset(
                             categories[index]['iconPath'],
@@ -133,7 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.grey.shade700,
                           ),
                         ),
-                        Text(categories[index]['name']),
+                        Container(
+                          margin: const EdgeInsets.only(left: 20, top: 10),
+                          child: Text(
+                            categories[index]['name'],
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -146,14 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return OverviewScreen();
+                      return const OverviewScreen();
                     },
                   ),
                 );
               },
               child: Container(
                 height: 240,
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -165,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: shadowList,
                             ),
-                            margin: EdgeInsets.only(top: 50),
+                            margin: const EdgeInsets.only(top: 50),
                           ),
                           Align(
                             child: Hero(
@@ -180,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Hero(
                         tag: 'whiteContainerStack',
                         child: Container(
-                          margin: EdgeInsets.only(top: 60, bottom: 20),
+                          margin: const EdgeInsets.only(top: 70, bottom: 20),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: const BorderRadius.only(
@@ -188,6 +205,74 @@ class _HomeScreenState extends State<HomeScreen> {
                               topRight: Radius.circular(20),
                             ),
                             boxShadow: shadowList,
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      'Sola',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      FontAwesomeIcons.mars,
+                                      color: Colors.black45,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      'Abyssinian cat',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      '2 years old',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: const [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.black54,
+                                      size: 20,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      'Distance: 3.6 km',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.black45,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -198,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               height: 240,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Expanded(
@@ -210,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: shadowList,
                           ),
-                          margin: EdgeInsets.only(top: 50),
+                          margin: const EdgeInsets.only(top: 50),
                         ),
                         Align(
                           child: Image.asset('assets/images/pet-cat1.png'),
@@ -220,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(top: 60, bottom: 20),
+                      margin: const EdgeInsets.only(top: 70, bottom: 20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.only(
@@ -228,6 +313,71 @@ class _HomeScreenState extends State<HomeScreen> {
                           topRight: Radius.circular(20),
                         ),
                         boxShadow: shadowList,
+                      ),
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Orion',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.mars,
+                                  color: Colors.black45,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Abyssinian cat',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  '1.5 years old',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: const [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.black54,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Distance: 7.8 km',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.black45,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -16,4 +16,6 @@ Huge Thanks to YouTube channel "The Growing Developer"
 
 ## Known bugs!
 
+I don't recommend open this project on landscape mode or devices with large screens 🙈🙊
+
 * Some overflow things(cuz when I was developed this app I worked with small screen emulator and when I tested it on real device I realized that it has problems with responsivnes)

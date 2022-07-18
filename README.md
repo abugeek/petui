@@ -1,16 +1,19 @@
-# petui
+# Pet UI
 
-A new Flutter project.
+I have learned a lot of new things from this project. Such as how to efficently work with Rows and Columns to structure beautiful UI, how to use Transform widget and work with Animations.
 
-## Getting Started
+Huge Thanks to YouTube channel "The Growing Developer"
 
-This project is a starting point for a Flutter application.
+## What's new here?
 
-A few resources to get you started if this is your first Flutter project:
+* Slightly redesigned
+* Added animation to white container
+* Added new screen
+* Added some information about cats 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/70211629/179616055-0745ec47-776f-467c-8fc6-800a3838bc06.gif)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Known bugs!
+
+* Some overflow things(cuz when I was developed this app I worked with small screen emulator and when I tested it on real device I realized that it has problems with responsivnes)
